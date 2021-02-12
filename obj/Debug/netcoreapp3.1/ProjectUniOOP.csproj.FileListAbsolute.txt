@@ -1,0 +1,13 @@
+C:\Users\Rizat\RiderProjects\ProjectUniOOP\ProjectUniOOP\bin\Debug\netcoreapp3.1\ProjectUniOOP.exe
+C:\Users\Rizat\RiderProjects\ProjectUniOOP\ProjectUniOOP\bin\Debug\netcoreapp3.1\ProjectUniOOP.deps.json
+C:\Users\Rizat\RiderProjects\ProjectUniOOP\ProjectUniOOP\bin\Debug\netcoreapp3.1\ProjectUniOOP.runtimeconfig.json
+C:\Users\Rizat\RiderProjects\ProjectUniOOP\ProjectUniOOP\bin\Debug\netcoreapp3.1\ProjectUniOOP.runtimeconfig.dev.json
+C:\Users\Rizat\RiderProjects\ProjectUniOOP\ProjectUniOOP\bin\Debug\netcoreapp3.1\ProjectUniOOP.dll
+C:\Users\Rizat\RiderProjects\ProjectUniOOP\ProjectUniOOP\bin\Debug\netcoreapp3.1\ProjectUniOOP.pdb
+C:\Users\Rizat\RiderProjects\ProjectUniOOP\ProjectUniOOP\obj\Debug\netcoreapp3.1\ProjectUniOOP.csprojAssemblyReference.cache
+C:\Users\Rizat\RiderProjects\ProjectUniOOP\ProjectUniOOP\obj\Debug\netcoreapp3.1\ProjectUniOOP.AssemblyInfoInputs.cache
+C:\Users\Rizat\RiderProjects\ProjectUniOOP\ProjectUniOOP\obj\Debug\netcoreapp3.1\ProjectUniOOP.AssemblyInfo.cs
+C:\Users\Rizat\RiderProjects\ProjectUniOOP\ProjectUniOOP\obj\Debug\netcoreapp3.1\ProjectUniOOP.csproj.CoreCompileInputs.cache
+C:\Users\Rizat\RiderProjects\ProjectUniOOP\ProjectUniOOP\obj\Debug\netcoreapp3.1\ProjectUniOOP.dll
+C:\Users\Rizat\RiderProjects\ProjectUniOOP\ProjectUniOOP\obj\Debug\netcoreapp3.1\ProjectUniOOP.pdb
+C:\Users\Rizat\RiderProjects\ProjectUniOOP\ProjectUniOOP\obj\Debug\netcoreapp3.1\ProjectUniOOP.genruntimeconfig.cache
