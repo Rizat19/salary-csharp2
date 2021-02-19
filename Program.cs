@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ProjectUniOOP
 {
@@ -6,93 +7,24 @@ namespace ProjectUniOOP
     {
         static void Main(string[] args)
         {
-            Console.Write("Атын - жониниз: ");
-            string fio = Console.ReadLine();
-            Console.Write("\nАйлыгыныз 1-айдагы: ");
-            int salary = int.Parse(Console.ReadLine());
-            Console.Write("\nЖумыска турган жылыныз: ");
-            int year = int.Parse(Console.ReadLine());
-            Console.Write("\nКанша айдагы таза табысынызды билгиниз келеди, санын енгизиниз: ");
-            int nmb = int.Parse(Console.ReadLine());
-            Console.Write("\nАптасына канша кун жумыс истеисиз: ");
-            int weekNmb = int.Parse(Console.ReadLine());
-            Console.Write("\nЖумыстан канша кун калдыныз, санын енгизиниз: ");
-            int notNmb = int.Parse(Console.ReadLine());
+            List<Salary> workers = new List<Salary>();
+            workers.Add(new Salary("Aisultan Erzhanov",440000,2010));
+            workers.Add(new Salary("Damira Serikovna", 150000, 2016));
+            workers.Add(new Salary("Alen Seitmatov", 200000, 2019));
             
-            Salary person1 = new Salary(fio, salary,year);
-            
-            // person1.Fio = "Lim Anna"; //set пайдалану
-            // person1.SalarySum = 250000; //set пайдалану
-            // person1.YearOfEmployment = 2015; //set пайдалану
-            
-            person1.IncomeTaxSalary(nmb);
-            person1.TotalNumWorkingDayOfMonthFunction(weekNmb,notNmb); // есептеу 1 айдагы келетин кундерин
-            line();
-            while (true)
+            for (var i = 0; i < workers.Count; i++)
             {
-                Console.WriteLine("Кажетти акпарат алу ушин реттик номерин енгизиниз: " +
-                              "\n1. кызметкердин аты-жони "+
-                              "\n2. жалакы сомасы (оклад) 1 ай ушин шарт бойынша "+
-                              "\n3. жумыска орналасу жылы "+
-                              "\n4. 1 айдагы табыс салыгы " + 
-                              "\n5. 1 ай ишиндеги жалпы жумыс кундеринин саны " + 
-                              "\n6. 1 ай ишиндеги жумыска келген кундеринин саны: " + 
-                              "\n7. берилген айлар ушин есептелген жалакы " + 
-                              "\n8. жалпы усталган акша молшерлери "+
-                              "\n9. жалпы барлык акпаратты билгим келеди "+
-                              "\n10. ешкандай акпарат кажет емес, шыгу ");
-                line();
-                int nmbChoice = int.Parse(Console.ReadLine());
-                if (nmbChoice==10)
-                {
-                    Console.WriteLine("Жарайды, онда сау болыныз. Келеси кездескенше...");
-                    break;
-                }
-                switch (nmbChoice)
-                {
-                    case 1:
-                        Console.WriteLine(person1.Fio);
-                        break;
-                    case 2:
-                        Console.WriteLine(person1.SalarySum);
-                        break;
-                    case 3:
-                        Console.WriteLine(person1.YearOfEmployment);
-                        break;
-                    case 4:
-                        Console.WriteLine(person1.IncomeTax/nmb);
-                        break;
-                    case 5:
-                        Console.WriteLine(person1.TotalNumWorkingDaysOfMonth);
-                        break;
-                    case 6:
-                        Console.WriteLine(person1.NumWorkingDaysOfMonth);
-                        break;
-                    case 7:
-                        Console.WriteLine(person1.SalarySumMonth);
-                        break;
-                    case 8:
-                        Console.WriteLine(person1.AmountsOfMoneyWithheld);
-                        break;
-                    case 9:
-                        Console.WriteLine(person1.ToString());
-                        break;
-                    default:
-                        Console.WriteLine("кате енгиздиниз, бундай акпарат жок!");
-                        break;
-                }
-
-                Console.Write("Жалгастыргыныз келе ме, 1-иа, 0-жок шыгу:");
-                int choiceNext = int.Parse(Console.ReadLine());
-                if (choiceNext==0)
-                {
-                    line();
-                    Console.WriteLine("Жарайды, онда сау болыныз. Келеси кездескенше");
-                    break;
-                }
-                Console.WriteLine();
+                workers[i].IncomeTaxSalary(i+1);
+                workers[i].TotalNumWorkingDayOfMonthFunction(6-i,1);
+                Console.WriteLine(workers[i]);
                 line();
             }
+
+            string fio = workers[0].minSalary(workers[1]);
+            Console.WriteLine($"2 сотрудник арасынан -{workers[0].Fio}, {workers[1].Fio}-Минимум жалакы алатын сотрудник: {fio}");
+
+            fio = workers[0].minSalary(workers[2]);
+            Console.WriteLine($"2 сотрудник арасынан -{workers[0].Fio}, {workers[2].Fio}-Минимум жалакы алатын сотрудник: {fio}");
         }
 
         static void line()
@@ -115,6 +47,8 @@ namespace ProjectUniOOP
             1.	есептелген жалақы мөлшерін анықтау; ұсталған ақша мөлшерін анықтау;
             2.	қолға берілетін ақша көлемін және жұмыс өтілін анықтау.*/
             //1. 3- апта тапсырмасы:класс өрістерін жабық түрде жариялап, оларға қатынасуға мүмкіндік беретін қасиеттерді құру.
+            //4 апта тапсырмасы: 2.	қызметкерлер массивінің ішінен ағымдағы ай үшін есептелген ақша мөлшері 
+            //ең аз болатын жұмысшыны қайтаратын әдіс құрыңыз.  
     
     class Salary
     {
@@ -133,10 +67,11 @@ namespace ProjectUniOOP
             this.FIO = "defaultFIO";
             this.salarySum = 0;
             this.yearOfEmployment = 0;
+            this._totalNumWorkingDaysOfMonth = 0;
         }
         public Salary(string name, int salarySumUser, int yearOfEmploymentUser)
         {
-            //пконструктор с параметрами
+            //конструктор с параметрами
             FIO = name;
             salarySum = salarySumUser;
             yearOfEmployment = yearOfEmploymentUser;
@@ -196,9 +131,13 @@ namespace ProjectUniOOP
             double opv = salary * 0.1;
             double ipn = (salary - opv - 42500) * 0.1;
             double tazaTabys = salary - (opv + ipn);
-            _salarySumMonth = salary;
-            _incomeTax = opv + ipn;
-            _amountsOfMoneyWithheld = salary-tazaTabys;
+            if (nMonth == 1)
+            {
+                _salarySumMonth = salary;
+                _incomeTax = opv + ipn; 
+                _amountsOfMoneyWithheld = salary-tazaTabys;
+            }
+            
             if (nMonth>1)
             {
                 tazaTabys = (salary - (opv + ipn)) * nMonth;
@@ -218,6 +157,21 @@ namespace ProjectUniOOP
             _totalNumWorkingDaysOfMonth = 4 * nWorkingWeek;
             _numWorkingDaysOfMonth = _totalNumWorkingDaysOfMonth - notWorkingDayOfMonth;
         }
+        
+        public string minSalary(Salary obj)
+        {
+            string sotrudnikMinSalary;
+            if (salarySum<obj.salarySum)
+            {
+                sotrudnikMinSalary = FIO;
+            }
+            else
+            {
+                sotrudnikMinSalary = obj.FIO;
+            }
+            return sotrudnikMinSalary;
+        }
+        
         public override string ToString()
         {
             int n = _salarySumMonth / salarySum;
