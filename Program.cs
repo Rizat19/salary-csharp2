@@ -11,6 +11,8 @@ namespace ProjectUniOOP
             workers.Add(new Salary("Aisultan Erzhanov",440000,2010));
             workers.Add(new Salary("Damira Serikovna", 150000, 2016));
             workers.Add(new Salary("Alen Seitmatov", 200000, 2019));
+            workers.Add(new Salary(workers[1])); // конструктор копирования
+            
             
             for (var i = 0; i < workers.Count; i++)
             {
@@ -20,11 +22,36 @@ namespace ProjectUniOOP
                 line();
             }
 
-            string fio = workers[0].minSalary(workers[1]);
+            int percent = 5;
+            Console.WriteLine();
+            Console.WriteLine("Сотрудриктердин белгили ай ушин сыйакысыз жалакылары");
+            line();
+            for (var i = 0; i < workers.Count; i++)
+            {
+                Console.WriteLine(workers[i].Fio+" 1 айдагы жалакысы:"+workers[i].SalarySum);
+                workers[i].reward();
+                line();
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("Сотрудриктердин белгили ай ушин сыйакымен жалакылары");
+            line();
+            for (var i = 0; i < workers.Count; i++)
+            {
+                Console.WriteLine(workers[i].Fio+" 1 айдагы жалакысы:"+workers[i].SalarySum);
+                workers[i].reward(percent);
+                percent++;
+                line();
+            }
+
+            /*string fio = workers[0].minSalary(workers[1]);
             Console.WriteLine($"2 сотрудник арасынан -{workers[0].Fio}, {workers[1].Fio}-Минимум жалакы алатын сотрудник: {fio}");
 
             fio = workers[0].minSalary(workers[2]);
-            Console.WriteLine($"2 сотрудник арасынан -{workers[0].Fio}, {workers[2].Fio}-Минимум жалакы алатын сотрудник: {fio}");
+            Console.WriteLine($"2 сотрудник арасынан -{workers[0].Fio}, {workers[2].Fio}-Минимум жалакы алатын сотрудник: {fio}");*/
+
+
+
         }
 
         static void line()
@@ -46,9 +73,13 @@ namespace ProjectUniOOP
              Келесі әдістерді жүзеге асырыңыз:
             1.	есептелген жалақы мөлшерін анықтау; ұсталған ақша мөлшерін анықтау;
             2.	қолға берілетін ақша көлемін және жұмыс өтілін анықтау.*/
-            //1. 3- апта тапсырмасы:класс өрістерін жабық түрде жариялап, оларға қатынасуға мүмкіндік беретін қасиеттерді құру.
-            //4 апта тапсырмасы: 2.	қызметкерлер массивінің ішінен ағымдағы ай үшін есептелген ақша мөлшері 
-            //ең аз болатын жұмысшыны қайтаратын әдіс құрыңыз.  
+            //-----------3 апта :класс өрістерін жабық түрде жариялап, оларға қатынасуға мүмкіндік беретін қасиеттерді құру.
+            //-----------4 апта : қызметкерлер массивінің ішінен ағымдағы ай үшін есептелген ақша мөлшері 
+            //                    ең аз болатын жұмысшыны қайтаратын әдіс құрыңыз.  
+            
+            /* --------- 6 апта: 1.	класс үшін бос, параметрлі және көшіру конструкторларын құру;
+                                 2.	белгілі бір ай үшін қолға берілетін жалақы мөлшерін есептеудің әдісін асыра жүктеу:
+                                 сыйақы тағайындау арқылы және сыйақы тағайындаусыз. */
     
     class Salary
     {
@@ -76,6 +107,23 @@ namespace ProjectUniOOP
             salarySum = salarySumUser;
             yearOfEmployment = yearOfEmploymentUser;
         }
+        
+        public Salary(string name, int salarySumUser)
+        {
+            //конструктор с параметрами name, salarySumUser
+            FIO = name;
+            salarySum = salarySumUser;
+            yearOfEmployment = 2020;
+        }
+        
+        public Salary(Salary obj)
+        {
+            //конструктор копирования
+            FIO = obj.FIO;
+            salarySum = obj.salarySum;
+            yearOfEmployment = obj.yearOfEmployment;
+        }
+        
         //аксессорлар/қасиеттер 
         public string Fio
         {
@@ -145,11 +193,25 @@ namespace ProjectUniOOP
                 _amountsOfMoneyWithheld = salary*nMonth-tazaTabys;
                 _salarySumMonth = salary*nMonth;
             }
-            // Console.WriteLine($"Шарт бойынша 1 айдагы жалакы молшери: {salary}, табыс салыгы 1айдагы: {opv+ipn}, жане 1 айдагы таза табыс: {tazaTabys/nMonth}");
-            // Console.WriteLine($"Онда жалпы {nMonth}-ай ушин шарт бойынша жалакы молшери:{_salarySumMonth}," +
-            //                   $"\n жане осы {nMonth}-ай ушин салык:{_incomeTax}, ал осы {nMonth}-айдагы таза табыс: {tazaTabys} ");
+        }
+        //белгілі бір ай үшін қолға берілетін жалақы мөлшерін есептеудің әдісін асыра жүктеу:
+        //сыйақы тағайындау арқылы және сыйақы тағайындаусыз
+        public void reward(int percent)
+        {
+            Console.WriteLine("Канша ай ушин берилетин жалакы молшерин есептегиниз келеди, санын енгизиниз: ");
+            int n = int.Parse(Console.ReadLine());
+            IncomeTaxSalary(n);
+            _salarySumMonth = _salarySumMonth + _salarySumMonth * percent / 100;
+            Console.WriteLine($"{percent} -проценттик сыйакыны коса есептегендеги {n} айдагы жалакы молшери: {_salarySumMonth}");
         }
         
+        public void reward()
+        {
+            Console.WriteLine("Канша ай ушин берилетин жалакы молшерин есептегиниз келеди, санын енгизиниз: ");
+            int n = int.Parse(Console.ReadLine());
+            IncomeTaxSalary(n);
+            Console.WriteLine($"сыйакы тагайындаусыз {n} айдагы жалакы молшери: {_salarySumMonth}");
+        }
 
         public void TotalNumWorkingDayOfMonthFunction(int nWorkingWeek, int notWorkingDayOfMonth)
         {
